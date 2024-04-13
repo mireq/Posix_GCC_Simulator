@@ -12,8 +12,8 @@
 
 typedef struct UDP_PACKET
 {
-	unsigned portCHAR ucPacket[ UDP_PACKET_SIZE ];
-	unsigned portCHAR ucNull;
+	unsigned char ucPacket[ UDP_PACKET_SIZE ];
+	unsigned char ucNull;
 } xUDPPacket;
 
 /**

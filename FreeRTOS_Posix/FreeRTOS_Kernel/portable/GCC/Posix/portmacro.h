@@ -16,8 +16,6 @@ extern "C" {
 /* Type definitions. */
 #define portSTACK_TYPE unsigned long
 #define portBASE_TYPE long
-#define portLONG long
-#define portSHORT short
 #define portUBASE_TYPE unsigned long
 #define portMAX_DELAY  (TickType_t) 0xffffffffffffffffUL
 #define portPOINTER_SIZE_TYPE uint64_t

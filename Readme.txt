@@ -1,4 +1,4 @@
-Posix GCC Eclipse FreeRTOS 6.0.4 Simulator
+Posix GCC FreeRTOS 10.4.3 Simulator
 
 Contributed by William Davy. william.davy@wittenstein.co.uk
 

@@ -65,11 +65,11 @@ Changes from V2.0.0
 #include "partest.h"
 #include "task.h"
 
-#define partstALL_OUTPUTS_OFF			( ( unsigned portCHAR ) 0x00 )
-#define partstMAX_OUTPUT_LED			( ( unsigned portCHAR ) 7 )
+#define partstALL_OUTPUTS_OFF			( ( unsigned char ) 0x00 )
+#define partstMAX_OUTPUT_LED			( ( unsigned char ) 7 )
 
 /*lint -e956 File scope parameters okay here. */
-static volatile unsigned portCHAR ucCurrentOutputValue = partstALL_OUTPUTS_OFF;
+static volatile unsigned char ucCurrentOutputValue = partstALL_OUTPUTS_OFF;
 /*lint +e956 */
 
 
@@ -87,7 +87,7 @@ void vParTestInitialise( void )
 
 void vParTestSetLED( unsigned portBASE_TYPE uxLED, portBASE_TYPE xValue )
 {
-unsigned portCHAR ucBit = ( unsigned portCHAR ) 1;
+unsigned char ucBit = ( unsigned char ) 1;
 
 	if( uxLED <= partstMAX_OUTPUT_LED )
 	{
@@ -98,7 +98,7 @@ unsigned portCHAR ucBit = ( unsigned portCHAR ) 1;
 	{
 		if( xValue == pdTRUE )
 		{
-			ucBit ^= ( unsigned portCHAR ) 0xff;
+			ucBit ^= ( unsigned char ) 0xff;
 			ucCurrentOutputValue &= ucBit;
 		}
 		else
@@ -114,11 +114,11 @@ unsigned portCHAR ucBit = ( unsigned portCHAR ) 1;
 
 void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 {
-unsigned portCHAR ucBit;
+unsigned char ucBit;
 
 	if( uxLED <= partstMAX_OUTPUT_LED )
 	{
-		ucBit = ( ( unsigned portCHAR ) 1 ) << uxLED;
+		ucBit = ( ( unsigned char ) 1 ) << uxLED;
 
 		vTaskSuspendAll();
 		{

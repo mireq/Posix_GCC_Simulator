@@ -36,7 +36,7 @@ static union sigval xParameters;
 static xPipeAndFunction xActualParameters;
 /*---------------------------------------------------------------------------*/
 
-mqd_t xPosixIPCOpen( const portCHAR *pcPipeName, void (*vMessageInterruptHandler)(xMessageObject,void*), void *pvContext )
+mqd_t xPosixIPCOpen( const char *pcPipeName, void (*vMessageInterruptHandler)(xMessageObject,void*), void *pvContext )
 {
 mqd_t hPipeHandle;
 struct sigaction sigrt;
@@ -91,7 +91,7 @@ struct sigaction sigrt;
 }
 /*---------------------------------------------------------------------------*/
 
-void vPosixIPCClose( mqd_t hPipeHandle, const portCHAR *pcPipeName )
+void vPosixIPCClose( mqd_t hPipeHandle, const char *pcPipeName )
 {
 	(void)mq_close( hPipeHandle );
 	if ( NULL != pcPipeName )
@@ -101,9 +101,9 @@ void vPosixIPCClose( mqd_t hPipeHandle, const portCHAR *pcPipeName )
 }
 /*---------------------------------------------------------------------------*/
 
-portLONG lPosixIPCSendMessage( mqd_t hPipeHandle, xMessageObject xMessage )
+long lPosixIPCSendMessage( mqd_t hPipeHandle, xMessageObject xMessage )
 {
-portLONG lReturn = pdFALSE;
+long lReturn = pdFALSE;
 
 	if ( 0 != hPipeHandle )
 	{
@@ -120,13 +120,13 @@ portLONG lReturn = pdFALSE;
 }
 /*---------------------------------------------------------------------------*/
 
-portLONG lPosixIPCReceiveMessage( mqd_t hPipeHandle, xMessageObject *pxMessage )
+long lPosixIPCReceiveMessage( mqd_t hPipeHandle, xMessageObject *pxMessage )
 {
 static char pcBuffer[ MAX_MESSAGE_SIZE ];
 unsigned int uiPriority;
-portLONG lBytesReceived = 0;
-portLONG lBytesToProcess;
-portLONG lReturn = pdFALSE;
+long lBytesReceived = 0;
+long lBytesToProcess;
+long lReturn = pdFALSE;
 
 	lBytesReceived = mq_receive( hPipeHandle, pcBuffer, MAX_MESSAGE_SIZE, &uiPriority );
 	for ( lBytesToProcess = 0; lBytesToProcess < lBytesReceived; lBytesToProcess += sizeof( xMessageObject ) )
@@ -156,7 +156,7 @@ xPipeAndFunction *pxPipes = ( xPipeAndFunction *)xParameters.sival_ptr;
 mqd_t hPipeHandle = 0;
 void (*vMessageInterruptHandler)(xMessageObject,void*) = NULL;
 xMessageObject xRxMessage;
-portLONG lMessagesReceived = 0;
+long lMessagesReceived = 0;
 
 	if ( NULL != pxPipes )
 	{

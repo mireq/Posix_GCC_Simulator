@@ -118,9 +118,9 @@ void vStartMathTasks( unsigned portBASE_TYPE uxPriority )
 
 static void vCompetingMathTask1( void *pvParameters )
 {
-portDOUBLE d1, d2, d3, d4;
+double d1, d2, d3, d4;
 volatile unsigned short *pusTaskCheckVariable;
-const portDOUBLE dAnswer = ( 123.4567 + 2345.6789 ) * -918.222;
+const double dAnswer = ( 123.4567 + 2345.6789 ) * -918.222;
 const char * const pcTaskStartMsg = "Math task 1 started.\r\n";
 const char * const pcTaskFailMsg = "Math task 1 failed.\r\n";
 short sError = pdFALSE;
@@ -165,9 +165,9 @@ short sError = pdFALSE;
 
 static void vCompetingMathTask2( void *pvParameters )
 {
-portDOUBLE d1, d2, d3, d4;
+double d1, d2, d3, d4;
 volatile unsigned short *pusTaskCheckVariable;
-const portDOUBLE dAnswer = ( -389.38 / 32498.2 ) * -2.0001;
+const double dAnswer = ( -389.38 / 32498.2 ) * -2.0001;
 const char * const pcTaskStartMsg = "Math task 2 started.\r\n";
 const char * const pcTaskFailMsg = "Math task 2 failed.\r\n";
 short sError = pdFALSE;
@@ -213,7 +213,7 @@ short sError = pdFALSE;
 
 static void vCompetingMathTask3( void *pvParameters )
 {
-portDOUBLE *pdArray, dTotal1, dTotal2, dDifference;
+double *pdArray, dTotal1, dTotal2, dDifference;
 volatile unsigned short *pusTaskCheckVariable;
 const unsigned short usArraySize = 250;
 unsigned short usPosition;
@@ -228,7 +228,7 @@ short sError = pdFALSE;
 	as the parameter. */
 	pusTaskCheckVariable = ( unsigned short * ) pvParameters;
 
-	pdArray = ( portDOUBLE * ) pvPortMalloc( ( size_t ) 250 * sizeof( portDOUBLE ) );
+	pdArray = ( double * ) pvPortMalloc( ( size_t ) 250 * sizeof( double ) );
 
 	/* Keep filling an array, keeping a running total of the values placed in the 
 	array.  Then run through the array adding up all the values.  If the two totals 
@@ -240,8 +240,8 @@ short sError = pdFALSE;
 
 		for( usPosition = 0; usPosition < usArraySize; usPosition++ )
 		{
-			pdArray[ usPosition ] = ( portDOUBLE ) usPosition + 5.5;
-			dTotal1 += ( portDOUBLE ) usPosition + 5.5;	
+			pdArray[ usPosition ] = ( double ) usPosition + 5.5;
+			dTotal1 += ( double ) usPosition + 5.5;	
 		}
 
 		taskYIELD();
@@ -272,7 +272,7 @@ short sError = pdFALSE;
 
 static void vCompetingMathTask4( void *pvParameters )
 {
-portDOUBLE *pdArray, dTotal1, dTotal2, dDifference;
+double *pdArray, dTotal1, dTotal2, dDifference;
 volatile unsigned short *pusTaskCheckVariable;
 const unsigned short usArraySize = 250;
 unsigned short usPosition;
@@ -287,7 +287,7 @@ short sError = pdFALSE;
 	as the parameter. */
 	pusTaskCheckVariable = ( unsigned short * ) pvParameters;
 
-	pdArray = ( portDOUBLE * ) pvPortMalloc( ( size_t ) 250 * sizeof( portDOUBLE ) );
+	pdArray = ( double * ) pvPortMalloc( ( size_t ) 250 * sizeof( double ) );
 
 	/* Keep filling an array, keeping a running total of the values placed in the 
 	array.  Then run through the array adding up all the values.  If the two totals 
@@ -299,8 +299,8 @@ short sError = pdFALSE;
 
 		for( usPosition = 0; usPosition < usArraySize; usPosition++ )
 		{
-			pdArray[ usPosition ] = ( portDOUBLE ) usPosition * 12.123;
-			dTotal1 += ( portDOUBLE ) usPosition * 12.123;	
+			pdArray[ usPosition ] = ( double ) usPosition * 12.123;
+			dTotal1 += ( double ) usPosition * 12.123;	
 		}
 
 		taskYIELD();

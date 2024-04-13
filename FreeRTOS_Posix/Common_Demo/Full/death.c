@@ -130,7 +130,7 @@ unsigned portBASE_TYPE *puxPriority;
 
 static void vSuicidalTask( void *pvParameters )
 {
-portDOUBLE d1, d2;
+double d1, d2;
 xTaskHandle xTaskToKill;
 const portTickType xDelay = ( portTickType ) 500 / portTICK_RATE_MS;
 

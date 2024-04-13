@@ -191,7 +191,7 @@ template<typename Lock, typename ObjectType, size_t Size> class MemoryPool {
 public:
 
     MemoryPool() {
-        for (int i = 0;i < Size;i++) {
+        for (std::size_t i = 0;i < Size;i++) {
             pool.push(&objects[i]);
         }
     }
@@ -239,7 +239,7 @@ JobThread<JobType>::JobThread() : job(nullptr) {
     static const char *name = "a job";
     vSemaphoreCreateBinary(this->signal);
     void *pMainLoop = (void*)&JobThread<JobType>::mainLoop;
-    portBASE_TYPE res = xTaskCreate((pdTASK_CODE)pMainLoop, (const signed char *)name, 300, this, 1, &this->pxCreatedTask);
+    portBASE_TYPE res = xTaskCreate((pdTASK_CODE)pMainLoop, (const char *)name, 300, this, 1, &this->pxCreatedTask);
     if (res != pdPASS) {
         cout << "Failed to create a task" << endl;
     }

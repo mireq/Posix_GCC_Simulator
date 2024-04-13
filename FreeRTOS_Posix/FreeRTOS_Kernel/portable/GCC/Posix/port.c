@@ -103,7 +103,7 @@ static volatile portBASE_TYPE xSchedulerEnd = pdFALSE;
 static volatile portBASE_TYPE xInterruptsEnabled = pdTRUE;
 static volatile portBASE_TYPE xServicingTick = pdFALSE;
 static volatile portBASE_TYPE xPendYield = pdFALSE;
-static volatile portLONG lIndexOfLastAddedTask = 0;
+static volatile long lIndexOfLastAddedTask = 0;
 static volatile unsigned portBASE_TYPE uxCriticalNesting;
 /*-----------------------------------------------------------*/
 
@@ -118,7 +118,7 @@ static void prvSetupSignalsAndSchedulerPolicy( void );
 static void prvSuspendThread( pthread_t xThreadId );
 static void prvResumeThread( pthread_t xThreadId );
 static pthread_t prvGetThreadHandle( xTaskHandle hTask );
-static portLONG prvGetFreeThreadState( void );
+static long prvGetFreeThreadState( void );
 static void prvSetTaskCriticalNesting( pthread_t xThreadId, unsigned portBASE_TYPE uxNesting );
 static unsigned portBASE_TYPE prvGetTaskCriticalNesting( pthread_t xThreadId );
 static void prvDeleteThread( void *xThreadId );
@@ -206,7 +206,7 @@ int iSignal;
 sigset_t xSignals;
 sigset_t xSignalToBlock;
 sigset_t xSignalsBlocked;
-portLONG lIndex;
+long lIndex;
 
 	/* Establish the signals to block before they are needed. */
 	sigfillset( &xSignalToBlock );
@@ -603,7 +603,7 @@ int iSchedulerPriority;
 	iResult = pthread_setschedparam( pthread_self(), iPolicy, &iSchedulerPriority );		*/
 
 struct sigaction sigsuspendself, sigresume, sigtick;
-portLONG lIndex;
+long lIndex;
 
 	pxThreads = ( xThreadState *)pvPortMalloc( sizeof( xThreadState ) * MAX_NUMBER_OF_TASKS );
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
@@ -644,7 +644,7 @@ portLONG lIndex;
 pthread_t prvGetThreadHandle( xTaskHandle hTask )
 {
 pthread_t hThread = ( pthread_t )NULL;
-portLONG lIndex;
+long lIndex;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
 	{
 		if ( pxThreads[ lIndex ].hTask == hTask )
@@ -657,9 +657,9 @@ portLONG lIndex;
 }
 /*-----------------------------------------------------------*/
 
-portLONG prvGetFreeThreadState( void )
+long prvGetFreeThreadState( void )
 {
-portLONG lIndex;
+long lIndex;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
 	{
 		if ( pxThreads[ lIndex ].hThread == ( pthread_t )NULL )
@@ -681,7 +681,7 @@ portLONG lIndex;
 
 void prvSetTaskCriticalNesting( pthread_t xThreadId, unsigned portBASE_TYPE uxNesting )
 {
-portLONG lIndex;
+long lIndex;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
 	{
 		if ( pxThreads[ lIndex ].hThread == xThreadId )
@@ -696,7 +696,7 @@ portLONG lIndex;
 unsigned portBASE_TYPE prvGetTaskCriticalNesting( pthread_t xThreadId )
 {
 unsigned portBASE_TYPE uxNesting = 0;
-portLONG lIndex;
+long lIndex;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
 	{
 		if ( pxThreads[ lIndex ].hThread == xThreadId )
@@ -711,7 +711,7 @@ portLONG lIndex;
 
 void prvDeleteThread( void *xThreadId )
 {
-portLONG lIndex;
+long lIndex;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )
 	{
 		if ( pxThreads[ lIndex ].hThread == ( pthread_t )xThreadId )
@@ -732,7 +732,7 @@ portLONG lIndex;
 
 void vPortAddTaskHandle( void *pxTaskHandle )
 {
-portLONG lIndex;
+long lIndex;
 
 	pxThreads[ lIndexOfLastAddedTask ].hTask = ( xTaskHandle )pxTaskHandle;
 	for ( lIndex = 0; lIndex < MAX_NUMBER_OF_TASKS; lIndex++ )

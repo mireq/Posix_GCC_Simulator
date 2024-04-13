@@ -72,8 +72,8 @@ void vDisplayMessage( const char * const pcMessageToPrint )
 
 void vWriteMessageToDisk( const char * const pcMessage )
 {
-const portCHAR * const pcFileName = "RTOSlog.txt";
-const portCHAR * const pcSeparator = "\r\n-----------------------\r\n";
+const char * const pcFileName = "RTOSlog.txt";
+const char * const pcSeparator = "\r\n-----------------------\r\n";
 FILE *pf;
 
 	vTaskSuspendAll();
@@ -81,8 +81,8 @@ FILE *pf;
 		pf = fopen( pcFileName, "a" );
 		if( pf != NULL )
 		{
-			fwrite( pcMessage, strlen( pcMessage ), ( unsigned portSHORT ) 1, pf );
-			fwrite( pcSeparator, strlen( pcSeparator ), ( unsigned portSHORT ) 1, pf );
+			fwrite( pcMessage, strlen( pcMessage ), ( unsigned short ) 1, pf );
+			fwrite( pcSeparator, strlen( pcSeparator ), ( unsigned short ) 1, pf );
 			fclose( pf );
 		}
 	}
@@ -92,7 +92,7 @@ FILE *pf;
 
 void vWriteBufferToDisk( const char * const pcBuffer, unsigned long ulBufferLength )
 {
-const portCHAR * const pcFileName = "trace.bin";
+const char * const pcFileName = "trace.bin";
 FILE *pf;
 
 	vTaskSuspendAll();
@@ -100,7 +100,7 @@ FILE *pf;
 		pf = fopen( pcFileName, "wb" );
 		if( pf )
 		{
-			fwrite( pcBuffer, ( size_t ) ulBufferLength, ( unsigned portSHORT ) 1, pf );
+			fwrite( pcBuffer, ( size_t ) ulBufferLength, ( unsigned short ) 1, pf );
 			fclose( pf );
 		}
 	}
