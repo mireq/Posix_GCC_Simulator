@@ -109,4 +109,8 @@ extern void vMainQueueSendPassed( void );
 
 #define configGENERATE_RUN_TIME_STATS		1
 
+#ifdef FREERTOS_EXTRA_CONFIG
+#include "FreeRTOSExtraConfig.h"
+#endif
+
 #endif /* FREERTOS_CONFIG_H */
